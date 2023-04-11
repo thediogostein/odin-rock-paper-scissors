@@ -1,2 +1,7 @@
 # odin-rock-paper-scissors
-This is the Project: Rock Paper Scissors for the Foundations Course
+
+Project Rock Paper Scissors [Foundations] - The Odin Project
+
+This is a Javascript project that I coded for The Odin Project, Foundations Course.
+
+You can check the requirements at https://www.theodinproject.com/lessons/foundations-rock-paper-scissors
