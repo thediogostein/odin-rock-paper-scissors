@@ -1,3 +1,27 @@
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissors = document.querySelector("#scissors");
+const result = document.querySelector("#result");
+const score = document.querySelector("#score");
+const winner = document.querySelector("#winner");
+let scorePlayer = 0;
+let scoreComputer = 0;
+
+btnRock.addEventListener("click", () => {
+  playerSelection = "rock";
+  game();
+});
+
+btnPaper.addEventListener("click", () => {
+  playerSelection = "paper";
+  game();
+});
+
+btnScissors.addEventListener("click", () => {
+  playerSelection = "scissors";
+  game();
+});
+
 function getComputerChoice() {
   let handSignals = ["rock", "paper", "scissors"];
   let randomIndex = Math.floor(Math.random() * 3);
@@ -37,35 +61,26 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-  let scorePlayer = 0;
-  let scoreComputer = 0;
+  const computerSelection = getComputerChoice();
 
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Type in (rock, paper, or scissors: ");
-    const computerSelection = getComputerChoice();
-
-    if (playRound(playerSelection, computerSelection) == "win") {
-      scorePlayer++;
-      console.log(`You Win. ${playerSelection} beats ${computerSelection}`);
-    } else if (playRound(playerSelection, computerSelection) == "loss") {
-      scoreComputer++;
-      console.log(`You Lose. ${computerSelection} beats ${playerSelection}`);
-    } else {
-      console.log(`It's a tie`);
-    }
-
-    console.log(
-      `Current game: ${playRound(playerSelection, computerSelection)}`
-    );
+  if (playRound(playerSelection, computerSelection) == "win") {
+    scorePlayer++;
+    score.innerText = `You: ${scorePlayer}\nComputer: ${scoreComputer}`;
+    result.innerText = `You Win. ${playerSelection} beats ${computerSelection}`;
+  } else if (playRound(playerSelection, computerSelection) == "loss") {
+    scoreComputer++;
+    score.innerText = `You: ${scorePlayer}\nComputer: ${scoreComputer}`;
+    result.innerText = `You Lose. ${computerSelection} beats ${playerSelection}`;
+  } else {
+    result.innerText = `It's a tie`;
+    score.innerText = `You: ${scorePlayer}\nComputer: ${scoreComputer}`;
   }
 
-  if (scorePlayer > scoreComputer) {
-    console.log("Player is the winner");
-  } else if (scorePlayer < scoreComputer) {
-    console.log("Computer is the winner");
-  } else {
-    ("It's a tie");
+  if (scorePlayer === 5) {
+    winner.innerText = "Player is the winner";
+  } else if (scoreComputer === 5) {
+    winner.innerText = "Computer is the winner";
+  } else if (scorePlayer === 5 && scoreComputer === 5) {
+    winner.innerText = "It's a tie";
   }
 }
-
-game();
